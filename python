@@ -1,0 +1,25 @@
+#entrada
+print("Digite os números (separados por espaço):")
+
+#processamento
+numeros_str = input().split() #slit() serve para que cada numero digitado seja um elemento na lista
+numeros = [int(num) for num in numeros_str] #converte cada elemento da lista em numero inteiro
+def calcular_mmc(numeros):
+    if not numeros:
+        return 0 #essa e a linha anterior verificam se a lista de números está vazia. Se estiver, a função retorna 0.
+
+    mmc = numeros[0] #inicia o mmc com o primeiro numero da lista
+    for num in numeros[1:]:
+        mdc = calcular_mdc(mmc, num)
+        mmc = (mmc * num) // mdc #fórmula
+
+    return mmc #retorna o mmc calculado
+
+def calcular_mdc(a, b): #essa função recebe 2 numeros inteiros como parametro e retorna o mdc
+    while b != 0:
+        a, b = b, a % b
+    return a #divisões e divisões ate que o resto seja zero para retornar o ultimo divisor
+
+#saida
+resultado_mmc = calcular_mmc(numeros)
+print(f"O Mínimo Múltiplo Comum de {numeros} é: {resultado_mmc}")
